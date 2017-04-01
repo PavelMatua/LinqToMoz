@@ -39,33 +39,30 @@ URL Metrics:
 ```c#
 string[] sites = { "yandex.ru", "google.com", "yahoo.com", "amazon.com", "microsoft.com"};
 
-			try
-			{
-				MOZService service = new MOZService("your access if","your security key");
-				var urlMetrics = service.QueryURLMetrics();
+try
+{
+	MOZService service = new MOZService("your access if","your security key");
+	var urlMetrics = service.QueryURLMetrics(
+	var result = urlMetrics.Where((arg) => sites.Contains(arg.SearchingURL) && arg.SourceCols == URLMetricsCols.FREE)
+		.Select(x => new { equityLinkNumber = x.MetricsResult.ueid, cononicalURL = x.MetricsResult.uu })
+		.OrderByDescending(x => x.equityLinkNumber);	
+	foreach (var webSite in result)
+	{
+		Console.WriteLine("For: " + webSite.cononicalURL + " was found: " + webSite.equityLinkNumber + " external 		  equity  links");
+
+	}
 
 
-				var result = urlMetrics.Where((arg) => sites.Contains(arg.SearchingURL) && arg.SourceCols == URLMetricsCols.FREE)
-									   .Select(x => new { equityLinkNumber = x.MetricsResult.ueid, cononicalURL = x.MetricsResult.uu })
-									   .OrderByDescending(x => x.equityLinkNumber);
+}
+catch (LINQTOMOZ.Exception e)
+{
+	Console.WriteLine(e.Message);
+}
 
-				foreach (var webSite in result)
-				{
-					Console.WriteLine("For: " + webSite.cononicalURL + " was found: " + webSite.equityLinkNumber + " external equity  links");
-
-				}
-
-
-			}
-			catch (LINQTOMOZ.Exception e)
-			{
-				Console.WriteLine(e.Message);
-			}
-
-			//		For: google.com / was found: 2695897 external equity links
-			// 		For: microsoft.com / was found: 478486 external equity links
-			//		For: yahoo.com / was found: 233997 external equity links
-			//		For: yandex.ru / was found: 146768 external equity links
-			//		For: amazon.com / was found: 141064 external equity links
+//		For: google.com / was found: 2695897 external equity links
+// 		For: microsoft.com / was found: 478486 external equity links
+//		For: yahoo.com / was found: 233997 external equity links
+//		For: yandex.ru / was found: 146768 external equity links
+//		For: amazon.com / was found: 141064 external equity links
 ```
 
