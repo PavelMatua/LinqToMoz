@@ -36,6 +36,7 @@ namespace LINQTOMOZ
 			get{
 				if (colsMetrics == 0)
 				{
+					searchingURL = new List<string>();
 					this.Visit(this._expression);
 				}
 				return this.colsMetrics;
