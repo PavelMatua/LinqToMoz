@@ -124,3 +124,18 @@ normalised anchor text : site Internet
 .......
 */
 ```
+## Useful information
+
+Follow classes maybe usfull for you:
+
+| Class         	| Type          | Use case  							|
+| -------------------- 	|:-------------:| -------------------------------------------------------------:|
+| URLMetricsContext     | parsed object | Contains all metrics information. Each metrics has description|
+| URLMetricsCols      	| enum	        | The Cols parameter uses bit flags to specify which URL metrics Mozscape returns. All and FREE is really useful.|
+| LinkMetricsCols 	| enum      	| LinkCols bit flags.			|
+| LinkFlags             | enul          | Bit flags referencing to 'fl' from  LinkMetricsCols |
+
+
+
+
+
