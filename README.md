@@ -14,7 +14,11 @@ For use this library you should just add LINQTOMOZ namespace to your class:
 ```c#
 using LINQTOMOZ;
 ```
+Next step is instantiate MOZService class. Constructor of this class takes 2 arguments:
 
+* access id
+* security key
 
-
-
+```c#
+MOZService service = new MOZService("your access if","your security key");
+```
