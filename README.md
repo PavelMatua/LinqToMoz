@@ -11,6 +11,7 @@ Implemented metrics:
 ## How use it?
 For use this library you should just add LINQTOMOZ namespace to your class:
 
+```c#
 using LINQTOMOZ;
 
 
