@@ -21,7 +21,7 @@ Next step is instantiate MOZService class. Constructor of this class takes 2 arg
 * security key
 
 ```c#
-MOZService service = new MOZService("your access if","your security key");
+MOZService service = new MOZService("your access key","your security key");
 ```
 This class provide you two main services. Link and Url metrcis services:
 ```c#
@@ -41,7 +41,7 @@ string[] sites = { "yandex.ru", "google.com", "yahoo.com", "amazon.com", "micros
 
 try
 {
-	MOZService service = new MOZService("your access if","your security key");
+	MOZService service = new MOZService("your access key","your security key");
 	var urlMetrics = service.QueryURLMetrics(
 	var result = urlMetrics.Where((arg) => sites.Contains(arg.SearchingURL) && arg.SourceCols == URLMetricsCols.FREE)
 		.Select(x => new { equityLinkNumber = x.MetricsResult.ueid, cononicalURL = x.MetricsResult.uu })
@@ -65,4 +65,62 @@ catch (LINQTOMOZ.Exception e)
 //		For: yandex.ru / was found: 146768 external equity links
 //		For: amazon.com / was found: 141064 external equity links
 ```
+Link Metrics:
+```c#
+MOZService service = new MOZService("your access key","your security key");
+var linkMetrics = service.QueryLinkMetrics();
 
+var result = linkMetrics.Where(x => x.SearchingURL == "www.quick.fr" && x.Scope == ScopeType.PageToDomain && x.Sort == Sort.DomainAuthority && x.SourceCols == URLMetricsCols.FREE && x.LinkCols == (LinkMetricsCols.Flags | LinkMetricsCols.AnchorText | LinkMetricsCols.NormalizedAnchorText | LinkMetricsCols.MozRankPassed))
+			.Select(x => new
+				{
+					sourceURL = x.MetricsResult.uu,
+					targetURL = x.MetricsResult.luuu,
+					domainAuthoritySource = x.MetricsResult.pda,
+					linkFlags = x.MetricsResult.lf,
+					anchorText = x.MetricsResult.lt,
+					normalisedAnchorText = x.MetricsResult.lnt
+				}).Take(12);
+StringBuilder sb = new StringBuilder();
+int i = 1;
+foreach (var metrics in result)
+{
+	sb.AppendLine("URL number: " + i);
+	sb.AppendLine("Source url : " + metrics.sourceURL);
+	sb.AppendLine("Target url : " + metrics.targetURL);
+	sb.AppendLine("domain authority % : " + metrics.domainAuthoritySource);
+	sb.AppendLine("link flags : " + metrics.linkFlags);
+	sb.AppendLine("anchor text : " + metrics.anchorText);
+	sb.AppendLine("normalised anchor text : " + metrics.normalisedAnchorText);
+	sb.AppendLine("================");
+	i++;
+
+Console.WriteLine(sb.ToString());
+
+/*
+URL number: 1
+Source url : www.huffingtonpost.com / thrillist / the - 16 - best - international_b_6062214.html
+Target url : www.quick.fr /
+domain authority % : 96,7003753122298
+link flags : NoFollow
+anchor text: Quick
+normalised anchor text : Quick
+================
+URL number: 2
+Source url : www.dmoz.org / World / Fran % C3 % A7ais / Commerce_et_ % C3 % A9conomie / Gastronomie_et_alimentation / Restaurants_et_bars /
+Target url: www.quick.fr /
+domain authority % : 90,6354758566414
+link flags : 
+anchor text : < div class="site-title">Quick</div>
+normalised anchor text : Quick
+================
+URL number: 3
+Source url : www.lemonde.fr/societe/article/2011/01/24/fermeture-d-un-fast-food-pres-d-avignon-apres-la-mort-suspecte-d-un-adolescent_1469591_3224.html
+Target url : groupe.quick.fr/fr/le-groupe/message-quick-avignon-cap-sud
+domain authority % : 90,4031713782802
+link flags : 
+anchor text : site Internet
+normalised anchor text : site Internet
+================
+.......
+*/
+```
