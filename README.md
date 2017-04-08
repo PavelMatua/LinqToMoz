@@ -129,11 +129,41 @@ normalised anchor text : site Internet
 Follow classes maybe usfull for you:
 
 | Class         	| Type          | Use case  							|
-| -------------------- 	|:-------------:| -------------------------------------------------------------:|
+| -------------------- 	|:-------------:| :-------------------------------------------------------------|
 | URLMetricsContext     | parsed object | Contains all metrics information. Each metrics has description|
 | URLMetricsCols      	| enum	        | The Cols parameter uses bit flags to specify which URL metrics Mozscape returns. All and FREE is really useful.|
 | LinkMetricsCols 	| enum      	| LinkCols bit flags.			|
 | LinkFlags             | enul          | Bit flags referencing to 'fl' from  LinkMetricsCols |
+
+
+####Enumerable methods:
+
+To be able to increase performance of you requests you can use some filters and limitations. More information but avalible filtres you can find at web page of MOZ API. 
+
+Methods:
+
+* Where();
+* Take();
+* Select()
+* Contains();
+
+All this method used to construct URL. 
+
+If you will use another methods like Order By or MAX etc... This method will be applied on the received data.
+
+#### Multi Thread and perf:
+
+Officially MOZ do not recommend to query data with more then one thread in parallel, especially with FREE version.
+
+So all your URLs will be divided by chunk of ten and send to the server as POST request in parallel. So like this for 20 URLs you will have just two thread.
+
+## Project:
+
+Unfortunately I was able to test it just with FREE subscription.
+If you will find some bugs please don't hesitate to contact me!
+
+
+
 
 
 
