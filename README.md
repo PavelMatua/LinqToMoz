@@ -42,7 +42,7 @@ string[] sites = { "yandex.ru", "google.com", "yahoo.com", "amazon.com", "micros
 try
 {
 	MOZService service = new MOZService("your access key","your security key");
-	var urlMetrics = service.QueryURLMetrics(
+	var urlMetrics = service.QueryURLMetrics();
 	var result = urlMetrics.Where((arg) => sites.Contains(arg.SearchingURL) && arg.SourceCols == URLMetricsCols.FREE)
 		.Select(x => new { equityLinkNumber = x.MetricsResult.ueid, cononicalURL = x.MetricsResult.uu })
 		.OrderByDescending(x => x.equityLinkNumber);	
