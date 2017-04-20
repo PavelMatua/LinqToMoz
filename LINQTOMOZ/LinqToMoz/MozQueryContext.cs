@@ -16,19 +16,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
-using System.Web;
 
 namespace LINQTOMOZ
 {
-	internal class MozQueryContext<TMetricsType> 
+	internal class MozQueryContext<TMetricsType>
 	{
 		AuthCalucalation authUrl = null;
 		private Type _type;
 		internal MozQueryContext(MozAuth authUrl)
 		{
 			this.authUrl = (AuthCalucalation)authUrl;
-	
+
 		}
 		// Executes the expression tree that is passed to it. 
 		internal object Execute(Expression expression, bool IsEnumerable)
@@ -48,7 +46,7 @@ namespace LINQTOMOZ
 			TakeFinder takeFinder = new TakeFinder();
 			MethodCallExpression takeExpression = takeFinder.GetInnermostTake(expression);
 			int limit = 10;
-			if(takeExpression != null)
+			if (takeExpression != null)
 				limit = (int)((ConstantExpression)(takeExpression.Arguments[1])).Value;
 
 
@@ -57,7 +55,7 @@ namespace LINQTOMOZ
 
 
 			TMetricsType[] metricsResult = returnedMetrics.ToArray();
-		
+
 			IQueryable<TMetricsType> queryableResult = metricsResult.AsQueryable<TMetricsType>();
 
 
@@ -68,11 +66,12 @@ namespace LINQTOMOZ
 			if (IsEnumerable)
 			{
 				return queryableResult.Provider.CreateQuery(newExpressionTree);
-			}else
+			}
+			else
 			{
 				return queryableResult.Provider.Execute(newExpressionTree);
 			}
-				
+
 		}
 
 		private List<TMetricsType> GetWebServiceResponse(Expression body, int limit)

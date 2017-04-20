@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("LINQTOMOZ")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Use .NET linq query to surf through MOZ API")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Pavel Matua")]
 [assembly: AssemblyProduct("LINQTOMOZ")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]

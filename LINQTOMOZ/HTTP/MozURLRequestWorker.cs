@@ -13,7 +13,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Text;
@@ -27,14 +26,14 @@ namespace LINQTOMOZ
 		private String finalURL;
 		private int _limit;
 		private int _offset;
-		public MozURLRequestWorker(int retry,AuthCalucalation auth,IQueryData queryData) : base(retry,auth)
+		public MozURLRequestWorker(int retry, AuthCalucalation auth, IQueryData queryData) : base(retry, auth)
 		{
 			//this._queryData = queryData;
 			this.finalURL = this.GenerateURL(queryData);
 
 		}
 
-		public MozURLRequestWorker(AuthCalucalation auth, IQueryData queryData, int limit=10, int offset=0) : base(5, auth)
+		public MozURLRequestWorker(AuthCalucalation auth, IQueryData queryData, int limit = 10, int offset = 0) : base(5, auth)
 		{
 			//this._queryData = queryData;
 			this._limit = limit;
@@ -48,14 +47,16 @@ namespace LINQTOMOZ
 		{
 			get
 			{
-				return (qr) => {
+				return (qr) =>
+				{
 					if (qr.GetType() == typeof(URLMetrics))
 					{
 						URLMetrics urlRequester = (URLMetrics)qr;
 						int metricsCalsValue = (int)urlRequester.SourceCols;
 						String urlQuery = "url-metrics/" + urlRequester.SearchingURL.ToString() + "?Cols=" + metricsCalsValue.ToString() + "&";
 						return urlQuery;
-					}else
+					}
+					else
 					{
 						LinkMetrics linkMetrics = (LinkMetrics)qr;
 
@@ -74,7 +75,7 @@ namespace LINQTOMOZ
 						return urlBuilder.ToString();
 
 					}
-				
+
 				};
 			}
 		}

@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace LINQTOMOZ
 {
@@ -25,20 +26,21 @@ namespace LINQTOMOZ
 	public class URLMetricsContext
 	{
 
-		
-        /// <summary>The email address for the target entity, if found on the site. Emails are collected automatically and are not CAN-SPAM compliant -- they cannot be used in outbound mail campaigns </summary>
-        public String fem { get; set; }
-        /// <summary>Facebook account for the target entity, if found on the site </summary>
+
+		/// <summary>The email address for the target entity, if found on the site. Emails are collected automatically and are not CAN-SPAM compliant -- they cannot be used in outbound mail campaigns </summary>
+		public String fem { get; set; }
+		/// <summary>Facebook account for the target entity, if found on the site </summary>
 		public String ffb { get; set; }
-        /// <summary>The Google+ account for the target entity, if found on the site </summary>
+		/// <summary>The Google+ account for the target entity, if found on the site </summary>
 		public String fg { get; set; }
-        /// <summary>Language of the subdomain </summary>
+		/// <summary>Language of the subdomain </summary>
 		public String flan { get; set; }
 		/// <summary>Epoch time when the subdomain was last crawled </summary>
 		public int fsplc { get; set; }
 		/// <summary>Bit field of triggered spam flags </summary>
 		public object fspf { get; set; }
 		/// <summary>List of pages used for the subdomain's spam crawl </summary>
+		[JsonConverter(typeof(JsonCustomConverter))]
 		public List<String> fspp { get; set; }
 		/// <summary>HTTP status code: The HTTP status code of the spam crawl </summary>
 		public int fsps { get; set; }
@@ -93,17 +95,17 @@ namespace LINQTOMOZ
 		/// <summary>The number of external equity links from other root domains to pages on the target URL's root domain </summary>
 		public int lupeid { get; set; }
 		/// <summary>The normalized (logarithmically-scaled) sum of MozRank gained from external links on all pages of the paid-level domain of the target URL </summary>
-		public int lupejp { get; set; }
+		public double lupejp { get; set; }
 		/// <summary>The raw (linearly-scaled) sum of MozRank gained from external links on all pages of the paid-level domain of the target URL </summary>
-		public int lupejr { get; set; }
+		public double lupejr { get; set; }
 		/// <summary>The number of domains with at least one link to any page on the paid-level domain of the target URL </summary>
 		public int lupid { get; set; }
 		/// <summary>The normalized (logarithmically-scaled) sum of MozRank gained from all pages on the paid-level domain of the target URL </summary>
-		public int lupjp { get; set; }
+		public double lupjp { get; set; }
 		/// <summary>he raw (linearly-scaled) sum of MozRank gained from all pages on the paid-level domain of the target URL </summary>
 		public int lupjr { get; set; }
 		/// <summary>The normalized (ten-point, logarithmically-scaled) measure of the MozRank of the paid-level domain of the target URL </summary>
-		public int lupmrp { get; set; }
+		public double lupmrp { get; set; }
 		/// <summary>The raw (zero to one, linearly-scaled) measure of the MozRank of the paid-level domain of the target URL </summary>
 		public double lupmrr { get; set; }
 		/// <summary>The normalized (ten-point, logarithmically-scaled) measure of the MozTrust of the paid-level domain of the target URL </summary>
@@ -111,13 +113,13 @@ namespace LINQTOMOZ
 		/// <summary>The raw (zero to one, linearly-scaled) measure of the MozTrust of the paid-level domain of the target URL </summary>
 		public int luptrr { get; set; }
 		/// <summary>The number of internal and external, equity and non-equity links to the root domain of the target URL </summary>
-		public int lupuid { get; set; }
+		public long lupuid { get; set; }
 		/// <summary>The number of external (from other subdomains) equity links to the target URL </summary>
 		public int luueid { get; set; }
 		/// <summary>last crawl luu </summary>
 		public String luulc { get; set; }
 		/// <summary>The normalized (ten-point, logarithmically-scaled) MozRank gained from external links of the target URL </summary>
-		public int luuemrp { get; set; }
+		public double luuemrp { get; set; }
 		/// <summary>The raw (zero to one, linearly-scaled) MozRank of the target URL gained from external links </summary>
 		public int luuemrr { get; set; }
 		/// <summary>The fully-qualified domain name ('subdomain') </summary>
@@ -147,7 +149,7 @@ namespace LINQTOMOZ
 		/// <summary>The title of the target URL, if available </summary>
 		public String luut { get; set; }
 		/// <summary>The normalized (ten-point, logarithmically-scaled) MozTrust of the target URL </summary>
-		public int luutrp { get; set; }
+		public double luutrp { get; set; }
 		/// <summary>The raw (zero to one, linearly-scaled) MozTrust of the target URL </summary>
 		public double luutrr { get; set; }
 		/// <summary>The canonical form of the target URL </summary>
@@ -159,31 +161,31 @@ namespace LINQTOMOZ
 		/// <summary>the number of external equity links to pages on the source URL's root domain </summary>
 		public int peid { get; set; }
 		/// <summary>The normalized (logarithmically-scaled) sum of the MozRank gained from external links on all pages in the paid-level domain of the source URL </summary>
-		public int pejp { get; set; }
+		public double pejp { get; set; }
 		/// <summary>The raw (linearly-scaled) sum of the MozRank gained from external links on all pages in the paid-level domain of the source URL </summary>
-		public int pejr { get; set; }
+		public double pejr { get; set; }
 		/// <summary>The number of domains with at least one link to any page on the paid-level domain of the source URL </summary>
 		public int pid { get; set; }
 		/// <summary>The normalized (logarithmically-scaled) sum of the MozRank of all pages in the paid-level domain of the source URL </summary>
-		public int pjp { get; set; }
+		public double pjp { get; set; }
 		/// <summary>The raw (linearly-scaled) sum of the MozRank of all the pages in the paid-level domain of the source URL </summary>
-		public int pjr { get; set; }
+		public double pjr { get; set; }
 		/// <summary>The normalized (ten-point, logarithmically-scaled) MozRank of the paid-level domain of the source URL </summary>
-		public int pmrp { get; set; }
+		public double pmrp { get; set; }
 		/// <summary>The raw (zero to one, linearly-scaled) measure of the MozRank of the paid-level domain of the source URL </summary>
 		public double pmrr { get; set; }
 		/// <summary>The normalized (ten-point, logarithmically-scaled) MozTrust of the paid-level domain of the source URL </summary>
-		public int ptrp { get; set; }
+		public double ptrp { get; set; }
 		/// <summary>The raw (zero to one, linearly-scaled) MozTrust of the paid-level domain of the source URL </summary>
 		public double ptrr { get; set; }
 		/// <summary>The number of internal and external equity and non-equity links to the root domain of the source URL </summary>
-		public int puid { get; set; }
+		public long puid { get; set; }
 		/// <summary>The number of external links to the target URL, including nofollowed links </summary>
 		public int ued { get; set; }
 		/// <summary>The number of external, equity links to the target URL </summary>
 		public int ueid { get; set; }
 		/// <summary>The normalized (ten-point, logarithmically-scaled) MozRank of the target URL gained from external links </summary>
-		public int uemrp { get; set; }
+		public double uemrp { get; set; }
 		/// <summary>The raw (zero to one, linearly-scaled) MozRank of the target URL gained from external links </summary>
 		public double uemrr { get; set; }
 		/// <summary>The fully qualified domain (subdomain) name </summary>
@@ -219,17 +221,16 @@ namespace LINQTOMOZ
 		/// <summary>The title of the target URL, if a title is available </summary>
 		public String ut { get; set; }
 		/// <summary>The normalized (ten-point, logarithmically-scaled) MozTrust of the target URL </summary>
-		public int utrp { get; set; }
+		public double utrp { get; set; }
 		/// <summary>The raw (zero to one, linearly-scaled) MozTrust of the target URL </summary>
 		public double utrr { get; set; }
 		/// <summary>The canonical form of the source URL </summary>
 		public String uu { get; set; }
 		/// <summary>Epoch last crawl source </summary>
 		public String ulc { get; set; }
-
-		private string _lf;
 		/// <summary>Link cols. Return array of string which contains attributes of link which was found for provided url </summary>
-		public string lf { get { return _lf; } set { _lf = GetFlafRange(Convert.ToInt32(value)); } }
+		[JsonConverter(typeof(JsonCustomConverter))]
+		public List<string> lf { get; set; }
 		//[Description("Link cols. Return array of string which contains attributes of link which was found for provided url")]
 		//public int lf { get; set; }
 
@@ -237,21 +238,6 @@ namespace LINQTOMOZ
 
 		public String lnt { get; set; }
 
-		private String GetFlafRange(int number)
-		{
-			//List<String> flags = new List<string>();
-			String result = String.Empty;
-			while (number != 0)
-			{
-				var list = Enum.GetValues(typeof(LinkFlags)).Cast<int>().ToList();
-				var closeNumber = list.Where(x => x <= number).OrderBy(item => Math.Abs(number - item)).First();
-				number -= closeNumber;
-				result = result + Enum.GetName(typeof(LinkFlags), closeNumber).ToString() + ";";
-
-			}
-
-			return result.Length > 0 ? result.Remove(result.Length - 1) : "";
-		}
 
 
 	}

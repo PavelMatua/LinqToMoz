@@ -13,12 +13,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 
 
 namespace LINQTOMOZ
@@ -39,8 +35,12 @@ namespace LINQTOMOZ
 			List<URLMetricsContext> metricsContexts = GetMetricsContext();
 
 			if (metricsContexts.Count != 0 && this._metricsData.Count != 0)
-				return metricsContexts.Select((context) => new URLMetrics { 
-				SearchingURL = this._metricsData.Where(arg => arg.SearchingURL.Replace("/", "") == context.uu.Replace("/", "")).FirstOrDefault() != null ?  this._metricsData.Where(arg => arg.SearchingURL.Replace("/", "") == context.uu.Replace("/", "")).FirstOrDefault().SearchingURL : "", SourceCols = this._metricsData[0].SourceCols, MetricsResult = context }).ToList();
+				return metricsContexts.Select((context) => new URLMetrics
+				{
+					SearchingURL = this._metricsData.Where(arg => arg.SearchingURL.Replace("/", "") == context.uu.Replace("/", "")).FirstOrDefault() != null ? this._metricsData.Where(arg => arg.SearchingURL.Replace("/", "") == context.uu.Replace("/", "")).FirstOrDefault().SearchingURL : "",
+					SourceCols = this._metricsData[0].SourceCols,
+					MetricsResult = context
+				}).ToList();
 			else return new List<URLMetrics>();
 
 		}
@@ -60,23 +60,23 @@ namespace LINQTOMOZ
 			{
 				List<List<URLMetrics>> tenSizeRequests = new List<List<URLMetrics>>();
 
-				for (int i = 0; i < this._metricsData.Count; i+=10)
+				for (int i = 0; i < this._metricsData.Count; i += 10)
 				{
 					tenSizeRequests.Add(this._metricsData.GetRange(i, Math.Min(10, this._metricsData.Count - i)));
 				}
 
-					var result = tenSizeRequests.AsParallel().Select( (chunk) =>
-					{
-						
+				var result = tenSizeRequests.AsParallel().Select((chunk) =>
+			   {
 
-							MozURLsRequestWorker urlRequester = new MozURLsRequestWorker(this._authentication, chunk.ToList<IQueryData>());
-							var executedResult = urlRequester.Execute();
 
-							//Thread.Sleep(1000);
-							return executedResult.Result;
-							
-						
-					}).ToList();
+				   MozURLsRequestWorker urlRequester = new MozURLsRequestWorker(this._authentication, chunk.ToList<IQueryData>());
+				   var executedResult = urlRequester.Execute();
+
+						//Thread.Sleep(1000);
+						return executedResult.Result;
+
+
+			   }).ToList();
 
 				resultFromServer.AddRange(result.SelectMany(x => x).ToList());
 

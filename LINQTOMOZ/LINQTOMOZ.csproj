@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NuGet.Build.Packaging.0.1.157-dev\build\NuGet.Build.Packaging.props" Condition="Exists('..\packages\NuGet.Build.Packaging.0.1.157-dev\build\NuGet.Build.Packaging.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +13,21 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <PackOnBuild>true</PackOnBuild>
+    <Owners>Pavel MATUA</Owners>
+    <PackageIconUrl>https://pbs.twimg.com/profile_images/504742247259062272/zImoOPa1_400x400.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/PavelMatua/LinqToMoz</PackageProjectUrl>
+    <Summary>LINQ provider to MOZ API</Summary>
+    <Title>LINQToMOZ</Title>
+    <PackageId>LINQTOMOZ.API</PackageId>
+    <PackageVersion>1.0.0.0</PackageVersion>
+    <Authors>Pavel MATUA</Authors>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageReleaseNotes>URL Metrics
+Link Metrics</PackageReleaseNotes>
+    <PackageTags>MOZ MOZSDK LINQTOMOZ LINQ MOZAPI API</PackageTags>
+    <Description>LINQ provider to MOZ API</Description>
+    <DevelopmentDependency>true</DevelopmentDependency>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -26,7 +42,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType></DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -92,6 +108,7 @@
     <Compile Include="URLMetrics\URLMetricsCols.cs" />
     <Compile Include="URLMetrics\URLMetricsContext.cs" />
     <Compile Include="netfx\System\DateTimeEpochExtensions.cs" />
+    <Compile Include="LinqToMoz\JsonCustomConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -105,4 +122,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="..\packages\NuGet.Build.Packaging.0.1.157-dev\build\NuGet.Build.Packaging.targets" Condition="Exists('..\packages\NuGet.Build.Packaging.0.1.157-dev\build\NuGet.Build.Packaging.targets')" />
 </Project>
