@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LINQTOMOZ</RootNamespace>
     <AssemblyName>LINQTOMOZ</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <PackOnBuild>true</PackOnBuild>
@@ -20,7 +20,7 @@
     <Summary>LINQ provider to MOZ API</Summary>
     <Title>LINQToMOZ</Title>
     <PackageId>LINQTOMOZ.API</PackageId>
-    <PackageVersion>1.0.0.0</PackageVersion>
+    <PackageVersion>1.0.0.1</PackageVersion>
     <Authors>Pavel MATUA</Authors>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageReleaseNotes>URL Metrics
@@ -28,6 +28,7 @@ Link Metrics</PackageReleaseNotes>
     <PackageTags>MOZ MOZSDK LINQTOMOZ LINQ MOZAPI API</PackageTags>
     <Description>LINQ provider to MOZ API</Description>
     <DevelopmentDependency>true</DevelopmentDependency>
+    <PackageLicenseUrl>https://github.com/PavelMatua/LinqToMoz/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -69,7 +70,7 @@ Link Metrics</PackageReleaseNotes>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
