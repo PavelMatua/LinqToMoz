@@ -4,4 +4,18 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Authentication\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="HTTP\" />
+    <Folder Include="LinkMetrics\" />
+    <Folder Include="LinqToMoz\" />
+    <Folder Include="URLMetrics\" />
+    <Folder Include="netfx\" />
+    <Folder Include="netfx\System\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="netfx-System.DateTimeEpochExtensions" Version="1.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
 </Project>
