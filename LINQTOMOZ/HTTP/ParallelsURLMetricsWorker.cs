@@ -37,13 +37,21 @@ namespace LINQTOMOZ
 			if (metricsContexts.Count != 0 && this._metricsData.Count != 0)
 				return metricsContexts.Select((context) => new URLMetrics
 				{
-					SearchingURL = this._metricsData.Where(arg => arg.SearchingURL.Replace("/", "") == context.uu.Replace("/", "")).FirstOrDefault() != null ? this._metricsData.Where(arg => arg.SearchingURL.Replace("/", "") == context.uu.Replace("/", "")).FirstOrDefault().SearchingURL : "",
+                SearchingURL = this._metricsData.Where(arg => arg.SearchingURL.Replace("/", "") == FormatURL(context)).FirstOrDefault() != null ? this._metricsData.Where(arg => arg.SearchingURL.Replace("/", "") == FormatURL(context)).FirstOrDefault().SearchingURL : "",
 					SourceCols = this._metricsData[0].SourceCols,
 					MetricsResult = context
 				}).ToList();
 			else return new List<URLMetrics>();
 
 		}
+
+        private string FormatURL(URLMetricsContext urlMetricsContext)
+        {
+            if (String.IsNullOrEmpty(urlMetricsContext.uu))
+                return "";
+
+            return urlMetricsContext.uu.Replace("/", "");
+        }
 
 		private List<URLMetricsContext> GetMetricsContext()
 		{

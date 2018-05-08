@@ -52,7 +52,11 @@ namespace LINQTOMOZ
 					if (qr.GetType() == typeof(URLMetrics))
 					{
 						URLMetrics urlRequester = (URLMetrics)qr;
-						int metricsCalsValue = (int)urlRequester.SourceCols;
+						long metricsCalsValue = (long)urlRequester.SourceCols;
+                        if (!urlRequester.SourceCols.HasFlag(URLMetricsCols.CanonicalURL))
+                        {
+                            metricsCalsValue += 4;
+                        }
 						String urlQuery = "url-metrics/" + urlRequester.SearchingURL.ToString() + "?Cols=" + metricsCalsValue.ToString() + "&";
 						return urlQuery;
 					}
