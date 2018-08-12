@@ -9,7 +9,7 @@ Implemented metrics:
 * Link Metrics
 
 ## How use it?
-For use this library you should just add LINQTOMOZ and LINQ namespace to your class:
+To use this library you should just add LINQTOMOZ and LINQ namespace to your class:
 
 ```c#
 using System.Linq;
@@ -31,7 +31,7 @@ var urlMetrics = service.QueryURLMetrics();
 
 var linkMetrics = service.QueryLinkMetrics();
 ```
-These variables hold the type of QueryableMozData which implement the IQueryable interface, so don't forget include System.Linq namespace
+These variables hold the type of QueryableMozData which implement the IQueryable interface, so don't forget to include System.Linq namespace
 
 ## Example
 
@@ -133,12 +133,12 @@ Follow classes maybe usfull for you:
 | URLMetricsContext     | parsed object | Contains all metrics information. Each metrics has description|
 | URLMetricsCols      	| enum	        | The Cols parameter uses bit flags to specify which URL metrics Mozscape returns. All and FREE is really useful.|
 | LinkMetricsCols 	| enum      	| LinkCols bit flags.			|
-| LinkFlags             | enul          | Bit flags referencing to 'fl' from  LinkMetricsCols |
+| LinkFlags             | enum          | Bit flags referencing to 'fl' from  LinkMetricsCols |
 
 
 ####Enumerable methods:
 
-To be able to increase performance of you requests you can use some filters and limitations. More information but avalible filtres you can find at web page of MOZ API. 
+To be able to increase performance for your requests you can use some filters and limitations. More information about avalible filtres you can find at web page of MOZ API. 
 
 Methods:
 
